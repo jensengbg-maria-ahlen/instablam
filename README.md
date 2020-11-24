@@ -26,9 +26,9 @@ Hope you will enjoy the app.
 ## Lighthouse
 |Kategori |Poäng |
 |-|-|
-|Fast and reliable | 0 / 3 |
-|Installable | 0 / 3 |
-|PWA Optimized | 0 / 8 |
+|Fast and reliable | 3 / 3 |
+|Installable | 3 / 3 |
+|PWA Optimized | 7 / 8 |
 
 
 
