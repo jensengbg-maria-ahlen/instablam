@@ -27,18 +27,16 @@ function cameraSettings() {
     const cameraOnButton = document.querySelector('.camera-on');
     const cameraOffButton = document.querySelector('.camera-off')
     const takePictureButton = document.querySelector('#take-picture');
+    const changeCameraButton = document.querySelector('.change-camera')
     const errorMessage = document.querySelector('.error-message');
     const video = document.querySelector('.video');
     const image = document.querySelector('.gallery-Images');
 
     let stream;
     let facingMode = 'environment';
-    //let chunks = [];
-    //let mediaRecorder;
 
     cameraOnButton.addEventListener('click', async () => {
         errorMessage.innerHTML = '';
-
         try {
             const md = navigator.mediaDevices;
             stream = await md.getUserMedia({
@@ -46,6 +44,7 @@ function cameraSettings() {
             })
             video.srcObject = stream;
             takePictureButton.disabled = false;
+            changeCameraButton.classList.remove('hidden');
             cameraOnButton.classList.add('hidden');
             cameraOffButton.classList.remove('hidden');
         } catch (e) {
@@ -62,8 +61,36 @@ function cameraSettings() {
         let tracks = stream.getTracks();
         tracks.forEach(track => track.stop());
         takePictureButton.disabled = true;
+        changeCameraButton.classList.add('hidden');
         cameraOnButton.classList.remove('hidden');
         cameraOffButton.classList.add('hidden');
+    })
+
+    takePictureButton.addEventListener('click', async () => {
+        errorMessage.innerHTML = '';
+        if (!stream) {
+            errorMessage.innerHTML = 'No video to take photo from.';
+            return;
+        }
+
+        let tracks = stream.getTracks();
+        let videoTrack = tracks[0];
+        let capture = new ImageCapture(videoTrack);
+        let blob = await capture.takePhoto();
+
+        let imgUrl = URL.createObjectURL(blob);
+        image.src = imgUrl;
+    })
+
+    changeCameraButton.addEventListener('click', () => {
+        if (facingMode == 'environment') {
+            facingMode = 'user';
+        } else {
+            facingMode = 'environment';
+        }
+
+        cameraOffButton.click();
+        cameraOnButton.click();
     })
 }
 
