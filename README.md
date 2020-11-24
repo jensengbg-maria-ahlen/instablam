@@ -9,7 +9,7 @@ Hope you will enjoy the app.
 
 
 
-##Testing in browsers
+## Testing in browsers
 |Browser      |Able to download |Geolocation |MediaDevices |Notification |Offline |Push |
 |----------------|--------|--------|-|-|-|-|
 |Desktop Chrome  |✔️|Inte testat|Inte testat|Inte testat|Inte testat|Inte testat|Inte testat|
@@ -20,6 +20,15 @@ Hope you will enjoy the app.
 |Mobil   Safari  |✔️|Inte testat|Inte testat|Inte testat|Inte testat|Inte testat|Inte testat|
 |Desktop Edge    |✔️|Inte testat|Inte testat|Inte testat|Inte testat|Inte testat|Inte testat|
 |Mobil   Edge    |✔️|Inte testat|Inte testat|Inte testat|Inte testat|Inte testat|Inte testat|
+
+
+
+## Lighthouse
+|Kategori |Poäng |
+|-|-|
+|Fast and reliable | 0 / 3 |
+|Installable | 0 / 3 |
+|PWA Optimized | 0 / 8 |
 
 
 
