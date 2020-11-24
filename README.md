@@ -8,5 +8,20 @@ You can remove previous pictures and download them to your device.
 Hope you will enjoy the app. 
 
 
+
+##Testing in browsers
+|Browser      |Able to download |Geolocation |MediaDevices |Notification |Offline |Push |
+|----------------|--------|--------|-|-|-|-|
+|Desktop Chrome  |✔️|Inte testat|Inte testat|Inte testat|Inte testat|Inte testat|Inte testat|
+|Mobil Chrome    |✔️|Inte testat|Inte testat|Inte testat|Inte testat|Inte testat|Inte testat|
+|Desktop Firefox |⛔|Inte testat|Inte testat|Inte testat|Inte testat|Inte testat|Inte testat|
+|Mobil   Firefox |✔️|Inte testat|Inte testat|Inte testat|Inte testat|Inte testat|Inte testat|
+|Desktop Safari  |❔|Inte testat|Inte testat|Inte testat|Inte testat|Inte testat|Inte testat|
+|Mobil   Safari  |✔️|Inte testat|Inte testat|Inte testat|Inte testat|Inte testat|Inte testat|
+|Desktop Edge    |✔️|Inte testat|Inte testat|Inte testat|Inte testat|Inte testat|Inte testat|
+|Mobil   Edge    |✔️|Inte testat|Inte testat|Inte testat|Inte testat|Inte testat|Inte testat|
+
+
+
 ##### Made by: Maria Åhlén
 Link to published webb page: https://marias-instablam.surge.sh/
