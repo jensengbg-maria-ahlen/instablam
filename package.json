@@ -1,0 +1,17 @@
+{
+  "name": "instablam",
+  "version": "1.0.0",
+  "description": "galery where you can take and save pictures",
+  "main": "sw.js",
+  "dependencies": {},
+  "devDependencies": {
+    "surge": "^0.21.7"
+  },
+  "scripts": {
+    "deploy": "surge . --domain https://marias-instablam.surge.sh",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Maria Åhlén",
+  "license": "ISC",
+  "keywords": []
+}
