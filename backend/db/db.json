@@ -1,0 +1,19 @@
+{
+  "images": [
+    {
+      "imgUrl:": "http://localhost:5006/img/forest.jpg",
+      "city": "Göteborg",
+      "country": "Sweden"
+    },
+    {
+      "imgUrl:": "http://localhost:5006/img/turtle.jpg",
+      "city": "Göteborg",
+      "country": "Sweden"
+    },
+    {
+      "imgUrl:": "http://localhost:5006/img/ocean.jpg",
+      "city": "Göteborg",
+      "country": "Sweden"
+    }
+  ]
+}
