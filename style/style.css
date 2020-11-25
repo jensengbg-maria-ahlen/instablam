@@ -11,3 +11,8 @@ body {
 .hidden {
     display: none;
 }
+
+a {
+    list-style-type: none;
+    text-decoration: none;
+}

@@ -1,7 +1,10 @@
-self.addEventListener('install', event => {    
+self.addEventListener('install', event => {   
+    console.log('Service worker installed: ', new Date().toLocaleDateString());
     event.waitUntil(
         caches.open('v1').then(cache => {
             return cache.addAll([
+                'camera.html',
+                'gallery.html',
                 'index.html',
                 'img/512.png',
                 'style/style.css',
@@ -13,11 +16,12 @@ self.addEventListener('install', event => {
 
 
 self.addEventListener('activate', event => {
-    console.log('Service worker activates at: ', new Date().toLocaleDateString());
+    console.log('Service worker activated: ', new Date().toLocaleDateString());
 });
 
 
 self.addEventListener('fetch', function(event) {
+    console.log('Service worked fetched: ', new Date().toLocaleDateString())
     if(navigator.onLine) {
         event.respondWith(fetch(event.request).then(response => {
             let clone = response.clone();

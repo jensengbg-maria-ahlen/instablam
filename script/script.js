@@ -18,8 +18,6 @@ window.addEventListener('load', () => {
     }
 
     notificationSettings();
-
-    gallerySettings();
 });
 
 
@@ -29,8 +27,10 @@ function cameraSettings() {
     const takePictureButton = document.querySelector('#take-picture');
     const changeCameraButton = document.querySelector('.change-camera')
     const errorMessage = document.querySelector('.error-message');
-    const video = document.querySelector('.video');
-    const image = document.querySelector('.gallery-Images');
+    const video = document.querySelector('video');
+    const pictureTaken = document.querySelector('.picture-taken');
+    const yesButton = document.querySelector('.yesButton');
+    const noButton = document.querySelector('.noButton');
 
     let stream;
     let facingMode = 'environment';
@@ -72,14 +72,19 @@ function cameraSettings() {
             errorMessage.innerHTML = 'No video to take photo from.';
             return;
         }
-
         let tracks = stream.getTracks();
         let videoTrack = tracks[0];
+        
         let capture = new ImageCapture(videoTrack);
         let blob = await capture.takePhoto();
-
+        
         let imgUrl = URL.createObjectURL(blob);
-        image.src = imgUrl;
+        pictureTaken.src = imgUrl;
+        
+        let divElem = document.querySelector('.picture');
+        divElem.classList.remove('hidden');
+
+        notificationSettings(pictureTaken);
     })
 
     changeCameraButton.addEventListener('click', () => {
@@ -88,11 +93,11 @@ function cameraSettings() {
         } else {
             facingMode = 'environment';
         }
-
         cameraOffButton.click();
         cameraOnButton.click();
     })
 }
+
 
 
 function locationSettings() {
@@ -104,45 +109,50 @@ function locationSettings() {
             let lng = pos.coords.longitude;
             getAdressFromPosition(lat, lng, position)
         }, error => {
-            position.innerHTML = 'Please <em>allow</em> position and I will tell the location fo the pictures.'
             console.log(error);
         });
     } catch (e) {
-        position.innerHTML = 'This device does not have access to the Geolocation API.';
+        console.log('This device does not have access to the Geolocation API.');
     }
 }
+
 
 async function getAdressFromPosition(lat, lng, position) {
     try {
         const response = await fetch(`https://geocode.xyz/${lat},${lng}?json=1`);
         const data = await response.json();
-
-        if (data.error) {
-            position.innerHTML = 'Could not get location information this time. Try again later.';
-        } else {
-            const city = data.city;
-            const country = data.country;
-            position.innerHTML = `Picture was taken at ${city}, ${country}.`;
-        }
+        console.log(data)
 
     } catch (e) {
-        position.innerHTML += `Could not find your city. Errormessage ${error}`;
+        console.log(e)
     }
 }
 
-function notificationSettings() {
+async function notificationSettings(image) {
+    let notificationPermission = false;
+    const errorMessage = document.querySelector('.error-message')
+    const answer = await Notification.requestPermission();
+    
+    if (answer == 'granted') {
+        notificationPermission = true;
+        const options = {
+            body: "This is your image",
+            icon: image.src
+        }
 
-}
+        let notif = new Notification('show', options);
+        navigator.serviceWorker.ready.then(reg => 
+            reg.showNotification('Image', options))
 
-function gallerySettings(image) {
-    const nextButton = document.querySelector('#next-button');
-    const deleteButton = document.querySelector('#delete-button');
-    const galleryImg = document.querySelector('.gallery-Images');
-    let imgIndex = 0;
-    const images = ['forest.jpg', 'ocean.jpg', 'turtle.jpg'];
+    } else if (answer == 'denied') {
+        console.log('Notificaton: User denied notification');
+    } else {
+        console.log('Notification: user declined to answer');
+    }
 
-    nextButton.addEventListener('click', () => {
-        imgIndex = (imgIndex + 1) % images.length;
-        galleryImg.src = 'img/' + images[imgIndex];
-    })
+    if (!notificationPermission) {
+        errorMessage.innerHTML = 'We do not have permission to show notification';
+        return;
+    }
+
 }

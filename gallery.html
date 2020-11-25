@@ -8,11 +8,11 @@
     <title>Instablam</title>
     
     <link rel="stylesheet" href="style/style.css">
-    <link rel="stylesheet" href="/style/font-awesome/css/all.css">
     <link rel="manifest" href="manifest.webmanifest">
     <link rel="shortcut icon" href="img/192.png" type="image/x-icon">
     <link rel="apple-touch-icon" href="img/192.png">
-    <script src="script/script.js" charset="UTF-8"></script>
+    
+    <script src="script/gallery.js" charset="UTF-8"></script>
 </head>
 <body>
     <main>
@@ -20,10 +20,16 @@
             <h1>INSTABLAM</h1>
         </header>
 
-        <nav>
-            <a href="/camera.html"><i class="fas fa-camera"></i></a>
-            <a href="/gallery.html"><i class="fas fa-images"></i></a>
-        </nav>
+        <section>
+            <div class="the-gallery">
+                <h2>The gallery</h2>
+                <button id="next-button">Next</button>
+                <img src="img/forest.jpg" alt="Picture in gallery" class="gallery-Images">
+                <p class="location"></p>
+                <a href="#" download class="downloadLink"> Download </a>
+                <button id="delete-button">Delete</button>
+            </div>
+        </section>
     </main>
     
 </body>
