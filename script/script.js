@@ -85,6 +85,7 @@ function cameraSettings() {
         divElem.classList.remove('hidden');
 
         notificationSettings(pictureTaken);
+        addToDatabase(pictureTaken.src)
     })
 
     changeCameraButton.addEventListener('click', () => {
@@ -107,7 +108,7 @@ function locationSettings() {
         geo.getCurrentPosition(pos => {
             let lat = pos.coords.latitude;
             let lng = pos.coords.longitude;
-            getAdressFromPosition(lat, lng, position)
+            getAdressFromPosition(lat, lng);
         }, error => {
             console.log(error);
         });
@@ -117,11 +118,12 @@ function locationSettings() {
 }
 
 
-async function getAdressFromPosition(lat, lng, position) {
+async function getAdressFromPosition(lat, lng) {
     try {
         const response = await fetch(`https://geocode.xyz/${lat},${lng}?json=1`);
         const data = await response.json();
-        console.log(data)
+        console.log('adress: ', data)
+        addToDatabase(data)
 
     } catch (e) {
         console.log(e)
@@ -137,7 +139,7 @@ async function notificationSettings(image) {
         notificationPermission = true;
         const options = {
             body: "This is your image",
-            icon: image.src
+            //icon: image.src
         }
 
         let notif = new Notification('show', options);
@@ -155,4 +157,32 @@ async function notificationSettings(image) {
         return;
     }
 
+}
+
+
+async function addToDatabase(image, position) { 
+    console.log('Position: ', position)
+    
+    let img = {
+        imgUrl: image,
+        city: position.city,
+        lng: position.country
+    }
+
+    console.log('IMG: ', img)
+
+    try {
+        const url = 'http://localhost:8000/gallery/add';
+        const response = await fetch(url, {
+            method: 'POST',
+            body: JSON.stringify(img),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+        const data = response.json();
+        return await data;
+    } catch(e) {
+        console.log('Error in fetch on addToDatabase: ', e);
+    }
 }

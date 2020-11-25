@@ -14,21 +14,24 @@ window.addEventListener('load', () => {
     }
 
     gallerySettings();
+    getImages();
 });
 
-function gallerySettings() {
+function gallerySettings(allImg) {
     const downloadLink = document.querySelector('.downloadLink')
     const nextButton = document.querySelector('#next-button');
     const deleteButton = document.querySelector('#delete-button');
     const galleryImg = document.querySelector('.gallery-Images');
     let imgIndex = 0;
-    const images = ['forest.jpg', 'ocean.jpg', 'turtle.jpg'];
+    const images = allImg;
+    console.log(images);
 
     nextButton.addEventListener('click', () => {
         imgIndex = (imgIndex + 1) % images.length;
         galleryImg.src = 'img/' + images[imgIndex];
         downloadLink.href = galleryImg.src;
         downloadLink.download = downloadLink.href;
+        console.log(galleryImg.src)
     });
 }
 
@@ -69,3 +72,21 @@ async function getAdressFromPosition(lat, lng, position) {
     }
 }
 
+
+async function getImages() {
+    const url = 'http://localhost:8000/gallery';
+    const response = await fetch(url, {method: 'GET'});
+    const data = await response.json();
+    gallerySettings(data);
+}
+
+async function deleteImg() {
+    const url = 'http://localhost:8000/gallery/delete';
+
+    const response = await fetch(url, {
+        method: 'DELETE'
+    });
+
+    const data = await response.json();
+    console.log(data);
+}
