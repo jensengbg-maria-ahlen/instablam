@@ -13,7 +13,7 @@ Hope you will enjoy the app.
 |Browser      |Able to download |Geolocation |MediaDevices |Notification |Offline |Push |
 |----------------|--------|--------|-|-|-|-|
 |Desktop Chrome  |✔️|✔️|✔️|✔️|Inte testat|Inte testat|
-|Mobil Chrome    |✔️|✔️|✔️|⛔|✔️|Inte testat|
+|Mobil Chrome    |✔️|✔️|✔️|⛔|Inte testat|Inte testat|
 |Desktop Firefox |⛔|✔️|⛔|✔️|Inte testat|Inte testat|
 |Mobil   Firefox |✔️|✔️|✔️|⛔|Inte testat|Inte testat|
 |Desktop Safari  |❔|❔|❔|❔|❔|❔|❔|
